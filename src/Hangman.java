@@ -17,7 +17,6 @@ public class Hangman {
             if(wordChecker[i] == '1') {
                 return false;
             }
-
         }
         return true;
     }
@@ -97,7 +96,7 @@ public class Hangman {
     public void replaceInWordChecker(char letter) {
         for(int i = 0; i < correctWord.length(); i ++) {
             if(correctWord.charAt(i) == Character.toLowerCase(letter) ){
-               wordChecker[i] = '0';
+                wordChecker[i] = '0';
                 guessSplit[i] = letter;
             }
         }
@@ -116,13 +115,13 @@ public class Hangman {
 
     }
     public void checkLetter(char letter) {
-            checkedLetters.add(letter);
-                if(isInCorrectWord(letter)) {
-                    replaceInWordChecker(letter);
-                } else {
-                    lives --;
-                    System.out.println("Lives: "+ lives);
-                }
+        checkedLetters.add(letter);
+        if(isInCorrectWord(letter)) {
+            replaceInWordChecker(letter);
+        } else {
+            lives --;
+            System.out.println("Lives: "+ lives);
+        }
         System.out.println("Word: " + Arrays.toString(guessSplit));
         System.out.println("Words Used: " + checkedLetters);
     }
@@ -130,7 +129,12 @@ public class Hangman {
     public char checkPlayAgain(Scanner myObj) {
         String letter = myObj.nextLine();
 
-        return letter.toLowerCase().charAt(0);
+        if(letter.length() > 0) {
+            return letter.toLowerCase().charAt(0);
+        } else {
+            return 'x';
+        }
+
     }
 
     public void draw(int lives) {
@@ -230,7 +234,7 @@ public class Hangman {
                 }
 
                 if(newGame.lives == 0) {
-                    System.out.println("You ran out of newGame.lives, you LOSE");
+                    System.out.println("You ran out of lives, you LOSE");
                     System.out.println("The correct word was: " + newGame.correctWord);
                     break;
                 }
@@ -260,7 +264,7 @@ public class Hangman {
                 }
             }
 
-            System.out.println("Please enter Y to play again anything else to exit");
+            System.out.println("Please enter Y to play again, anything else to exit");
             char playAgain = newGame.checkPlayAgain(myObj);
             if(playAgain == 'y') {
                 System.out.println("New game loading...");
